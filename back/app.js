@@ -9,11 +9,11 @@ if(!process.env.apiKey) throw new Error('Missing field "apiKey",from stripe doc,
 if(!process.env.priceKey) throw new Error('Missing field "priceKey",from stripe doc, in your dotenv')
   
 const stripe = require('stripe')(process.env.apiKey);
-app.use(express.static('public'));
 
 
 const DOMAIN = 'http://localhost:3001';
 
+app.use('/public',express.static(__dirname + '/public/'));
 app.post('/stripe',async (req,res) =>{
     const session = await stripe.checkout.sessions.create({
       line_items: [
